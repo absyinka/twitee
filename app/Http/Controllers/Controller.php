@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 /**
  * @OA\Info(
- *    title="Book Rating API",
+ *    title="Twitee API",
  *    version="1.0.0",
  * )
  */

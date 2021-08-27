@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Book Rating API",
+        "title": "Twitee API",
         "version": "1.0.0"
     },
     "paths": {
@@ -11,7 +11,7 @@
                     "Auth"
                 ],
                 "summary": "Register user",
-                "description": "Provide name, email and password to register user",
+                "description": "Provide email and password to register user",
                 "operationId": "authRegister",
                 "requestBody": {
                     "description": "Provide user details for registration",
@@ -20,15 +20,10 @@
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "name",
                                     "email",
                                     "password"
                                 ],
                                 "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "example": "name"
-                                    },
                                     "email": {
                                         "type": "string",
                                         "format": "email",
@@ -205,77 +200,27 @@
                 }
             }
         },
-        "/all-books": {
-            "get": {
-                "tags": [
-                    "Books"
-                ],
-                "summary": "Get list of books",
-                "description": "Returns list of books",
-                "operationId": "getBooksList",
-                "responses": {
-                    "200": {
-                        "description": "All Books",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "example": "1"
-                                        },
-                                        "title": {
-                                            "type": "string",
-                                            "example": "The Lone Wolf"
-                                        },
-                                        "author": {
-                                            "type": "string",
-                                            "example": "Jake Fox"
-                                        },
-                                        "username": {
-                                            "type": "string",
-                                            "example": "Olaide"
-                                        },
-                                        "average_rating": {
-                                            "type": "integer",
-                                            "example": "3.5"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/book": {
+        "/comment/{post}": {
             "post": {
                 "tags": [
-                    "Books"
+                    "Comment"
                 ],
-                "summary": "Create a book",
-                "description": "User create a book",
-                "operationId": "createBook",
+                "summary": "Add a comment",
+                "description": "Add comment to a post",
+                "operationId": "addComment",
                 "requestBody": {
-                    "description": "Provide book details",
+                    "description": "Add a comment",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "title",
-                                    "author"
+                                    "comment_text"
                                 ],
                                 "properties": {
-                                    "title": {
+                                    "comment_text": {
                                         "type": "string",
-                                        "example": "The Jungle Book"
-                                    },
-                                    "author": {
-                                        "type": "string",
-                                        "format": "email",
-                                        "example": "Mane Lane"
+                                        "example": "This is a comment text"
                                     }
                                 },
                                 "type": "object"
@@ -285,310 +230,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Book created successfully!",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "format": "integer",
-                                            "example": "3"
-                                        },
-                                        "title": {
-                                            "type": "string",
-                                            "example": "The Jungle Book"
-                                        },
-                                        "author": {
-                                            "type": "string",
-                                            "example": "Mane Lane"
-                                        },
-                                        "username": {
-                                            "type": "string",
-                                            "example": "Olamide"
-                                        },
-                                        "average_rating": {
-                                            "type": "string",
-                                            "example": "null"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Fields are required",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "fields are required"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/book/{id}": {
-            "get": {
-                "tags": [
-                    "Books"
-                ],
-                "summary": "Get a book detail",
-                "description": "Returns detail of a particular book",
-                "operationId": "getBookDetail",
-                "responses": {
-                    "200": {
-                        "description": "Book detail:",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "example": "1"
-                                        },
-                                        "title": {
-                                            "type": "string",
-                                            "example": "The Lone Wolf"
-                                        },
-                                        "author": {
-                                            "type": "string",
-                                            "example": "Jake Fox"
-                                        },
-                                        "username": {
-                                            "type": "string",
-                                            "example": "Olaide"
-                                        },
-                                        "average_rating": {
-                                            "type": "integer",
-                                            "example": "3.5"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Book not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "book does not exist"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "put": {
-                "tags": [
-                    "Books"
-                ],
-                "summary": "Update a book",
-                "description": "User update a book",
-                "operationId": "updateBook",
-                "requestBody": {
-                    "description": "Provide book details",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "title",
-                                    "author"
-                                ],
-                                "properties": {
-                                    "title": {
-                                        "type": "string",
-                                        "example": "The Jungle"
-                                    },
-                                    "author": {
-                                        "type": "string",
-                                        "format": "email",
-                                        "example": "Mane Rice"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Book updated successfully!",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "string",
-                                            "format": "integer",
-                                            "example": "3"
-                                        },
-                                        "title": {
-                                            "type": "string",
-                                            "example": "The Jungle"
-                                        },
-                                        "author": {
-                                            "type": "string",
-                                            "example": "Mane Rice"
-                                        },
-                                        "username": {
-                                            "type": "string",
-                                            "example": "Olamide"
-                                        },
-                                        "average_rating": {
-                                            "type": "string",
-                                            "example": "null"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Fields are required",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "fields are required"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Book not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "book does not exist"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "You don't have access to update this book: The Lone Wolf!"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "Books"
-                ],
-                "summary": "Delete a book",
-                "description": "Delete a book along with it's ratings",
-                "operationId": "deleteBook",
-                "responses": {
-                    "204": {
-                        "description": "No content"
-                    },
-                    "404": {
-                        "description": "Book not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "book does not exist"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Access forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "You don't have access to delete this book: The Lone Wolf!"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/rating/{book}": {
-            "post": {
-                "tags": [
-                    "Rating"
-                ],
-                "summary": "Add a rating",
-                "description": "Add rating to a book",
-                "operationId": "addRating",
-                "requestBody": {
-                    "description": "Add a rating",
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "required": [
-                                    "rating"
-                                ],
-                                "properties": {
-                                    "rating": {
-                                        "type": "integer",
-                                        "example": "4"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Rating added successfully!",
+                        "description": "Comment added successfully!",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -601,21 +243,13 @@
                                             "type": "integer",
                                             "example": "1"
                                         },
-                                        "book_id": {
+                                        "post_id": {
                                             "type": "integer",
                                             "example": "4"
                                         },
-                                        "rating": {
-                                            "type": "integer",
-                                            "example": "3"
-                                        },
-                                        "book_title": {
+                                        "comment_text": {
                                             "type": "string",
-                                            "example": "The Lone Wolf"
-                                        },
-                                        "book_author": {
-                                            "type": "string",
-                                            "example": "Lionel Jones"
+                                            "example": "test comment"
                                         }
                                     },
                                     "type": "object"
@@ -642,27 +276,110 @@
                 }
             }
         },
-        "/rating/{book_id}/{id}": {
-            "put": {
+        "comment/{post_id}/{id}": {
+            "delete": {
                 "tags": [
-                    "Rating"
+                    "Comment"
                 ],
-                "summary": "Update rating",
-                "description": "Update rating on a book",
-                "operationId": "updateRating",
+                "summary": "Delete comment",
+                "description": "Delete post comment",
+                "operationId": "deleteComment",
+                "responses": {
+                    "204": {
+                        "description": "No content"
+                    },
+                    "404": {
+                        "description": "Post or comment not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Post or comment does not exist"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Access forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "You don't have access to delete this comment!"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/posts": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get list of posts",
+                "description": "Returns list of posts",
+                "operationId": "allPosts",
+                "responses": {
+                    "200": {
+                        "description": "All Posts",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "username": {
+                                            "type": "string",
+                                            "example": "Jon Write"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "The goldie is back"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/post": {
+            "post": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Create a post",
+                "description": "User create a post",
+                "operationId": "createPost",
                 "requestBody": {
-                    "description": "Update book rating",
+                    "description": "Provide post details",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "required": [
-                                    "rating"
+                                    "content"
                                 ],
                                 "properties": {
-                                    "rating": {
-                                        "type": "integer",
-                                        "example": "5"
+                                    "content": {
+                                        "type": "string",
+                                        "example": "The goldie is back"
                                     }
                                 },
                                 "type": "object"
@@ -672,7 +389,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Rating updated successfully!",
+                        "description": "Post created successfully!",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -681,25 +398,13 @@
                                             "type": "integer",
                                             "example": "1"
                                         },
-                                        "user_id": {
-                                            "type": "integer",
-                                            "example": "1"
-                                        },
-                                        "book_id": {
-                                            "type": "integer",
-                                            "example": "4"
-                                        },
-                                        "rating": {
-                                            "type": "integer",
-                                            "example": "4.5"
-                                        },
-                                        "book_title": {
+                                        "username": {
                                             "type": "string",
-                                            "example": "The Lone Wolf"
+                                            "example": "Jon Write"
                                         },
-                                        "book_author": {
+                                        "title": {
                                             "type": "string",
-                                            "example": "Lionel Jones"
+                                            "example": "The goldie is back"
                                         }
                                     },
                                     "type": "object"
@@ -722,16 +427,36 @@
                                 }
                             }
                         }
-                    },
-                    "404": {
-                        "description": "Rating or book not found",
+                    }
+                }
+            }
+        },
+        "/post/{id}": {
+            "get": {
+                "tags": [
+                    "Post"
+                ],
+                "summary": "Get a post detail",
+                "description": "Returns detail of a particular post",
+                "operationId": "getPostDetail",
+                "responses": {
+                    "200": {
+                        "description": "Post detail:",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
-                                        "message": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": "1"
+                                        },
+                                        "username": {
                                             "type": "string",
-                                            "example": "rating or book does not exist"
+                                            "example": "Jon Write"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "The goldie is back"
                                         }
                                     },
                                     "type": "object"
@@ -739,15 +464,15 @@
                             }
                         }
                     },
-                    "403": {
-                        "description": "Access forbidden",
+                    "404": {
+                        "description": "Post not found",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "You don't have access to edit this rating!"
+                                            "example": "post does not exist"
                                         }
                                     },
                                     "type": "object"
@@ -759,24 +484,24 @@
             },
             "delete": {
                 "tags": [
-                    "Rating"
+                    "Post"
                 ],
-                "summary": "Delete rating",
-                "description": "Delete book rating",
-                "operationId": "deleteRating",
+                "summary": "Delete a post",
+                "description": "Delete a post along with it's comments",
+                "operationId": "deletePost",
                 "responses": {
                     "204": {
                         "description": "No content"
                     },
                     "404": {
-                        "description": "Rating or book not found",
+                        "description": "Post not found",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "rating or book does not exist"
+                                            "example": "Post does not exist"
                                         }
                                     },
                                     "type": "object"
@@ -792,7 +517,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "You don't have access to delete this rating!"
+                                            "example": "You don't have access to delete this post: The goldie is back!"
                                         }
                                     },
                                     "type": "object"

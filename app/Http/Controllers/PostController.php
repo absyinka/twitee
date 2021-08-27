@@ -25,7 +25,7 @@ class PostController extends Controller
      * @OA\Get(
      *      path="/posts",
      *      operationId="allPosts",
-     *      tags={"Posts"},
+     *      tags={"Post"},
      *      summary="Get list of posts",
      *      description="Returns list of posts",
      *      @OA\Response(

@@ -4,8 +4,9 @@
 
 This API is built with the **Laravel Framework:**
 
-<!-- -   API Live url: **(https://protected-sands-80968.herokuapp.com/api/book-rating/v1.0/)**
--   API Documentation url: **(http://protected-sands-80968.herokuapp.com/api/docs)** -->
+<!-- -   API Live url: **(https://protected-sands-80968.herokuapp.com/api/book-rating/v1.0/)** -->
+
+-   API Local Documentation url: **(127.0.0.1:8000/api/docs)**
 
 ## Cloning the project
 

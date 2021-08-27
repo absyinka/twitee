@@ -68,7 +68,7 @@ class CommentController extends Controller
      * summary="Delete comment",
      * description="Delete comment on a post",
      * operationId="deleteComment",
-     * tags={"comment"},
+     * tags={"Comment"},
      * description="Delete post comment",
      * 
      * @OA\Response(

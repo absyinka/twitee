@@ -5,7 +5,7 @@ return [
     'documentations' => [
         'default' => [
             'api' => [
-                'title' => 'Book Rating API',
+                'title' => 'Twitee API',
             ],
 
             'routes' => [

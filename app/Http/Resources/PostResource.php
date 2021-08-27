@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'content' => $this->content,
             'username' => ucfirst($this->user->name),
             'created_at' => $this->created_at,
-            'comments' => $this->comments
+            'comments' => CommentResource::collection($this->whenLoaded('comments'))
         ];
     }
 }
